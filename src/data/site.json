@@ -1,0 +1,39 @@
+{
+  "name": "Anujan Kopu",
+  "subtitle": "Computer Science @ UofT",
+  "title": "Anujan Kopu",
+  "description": "Anujan's personal portfolio",
+
+  "about": {
+    "textBefore": "Hi! I'm Anujan. SWE @ ",
+    "company": "TD Bank",
+    "companyUrl": "https://td.com",
+    "textAfter": ", CS @ University of Toronto. I build AI infra, scalable systems, and obsess over performance and code quality."
+  },
+
+  "sections": [
+    {
+      "title": "past work experience",
+      "items": [
+        { "text": "Previously @", "company": "Dibbly", "companyUrl": "https://create.dibbly.com/", "suffix": "working with AI Infra" },
+        { "text": "Worked @", "company": "Klink", "companyUrl": "https://www.klinkapp.com/", "suffix": "(AWS, DBMS, CI/CD)" },
+        { "text": "Built backend & game systems @", "company": "Legion Studios", "companyUrl": "https://www.roblox.com/communities/2791281/Legion-Studios#!/about" },
+        { "text": "Previous fullstack engineer @", "company": "TCF", "companyUrl": "https://tcf-website.vercel.app/" }
+      ]
+    },
+    {
+      "title": "entrepreneurial",
+      "items": [
+        { "text": "Building the #1 AI animation platform", "linkText": "Toona.io", "linkUrl": "https://toona.io" },
+        { "text": "Working on RoCoder, games, and a few other projects" },
+        { "text": "Built a game studio (500k+ plays)" }
+      ]
+    }
+  ],
+
+  "socials": [
+    { "name": "Github", "url": "https://github.com/AnujanKopu", "icon": "github" },
+    { "name": "LinkedIn", "url": "https://www.linkedin.com/in/anujankopu/", "icon": "linkedin" },
+    { "name": "Email", "url": "mailto:anujan.kopu@mail.utoronto.ca", "icon": "mail" }
+  ]
+}

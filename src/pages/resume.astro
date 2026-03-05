@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+---
+
+<Base title={`Resume — ${site.name}`} description={`${site.name}'s resume`}>
+  <div class="resume-page">
+    <nav class="resume-nav">
+      <a href="/" class="back-link">&larr; back</a>
+      <a href="/resume.pdf" download class="download-btn">&darr; Download PDF</a>
+    </nav>
+
+    <iframe src="/resume.pdf" title="Resume" class="resume-embed"></iframe>
+
+    <p class="resume-fallback">
+      Can't see the PDF? <a href="/resume.pdf" download>Download it here</a>.
+    </p>
+  </div>
+</Base>

@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import AsciiVideo from '../components/AsciiVideo.astro';
+import site from '../data/site.json';
+---
+
+<Base title={site.title} description={site.description}>
+  <main>
+    <!-- Left: content -->
+    <div class="content">
+      <h1 class="name">{site.name}</h1>
+      <p class="subtitle">{site.subtitle}</p>
+
+      <!-- About -->
+      <section>
+        <h2 class="section-title">about</h2>
+        <p class="about-intro">
+          {site.about.textBefore}<a href={site.about.companyUrl} target="_blank" rel="noopener noreferrer"><strong>{site.about.company}</strong></a>{site.about.textAfter}
+        </p>
+      </section>
+
+      <!-- Dynamic sections -->
+      {site.sections.map((section) => (
+        <section>
+          <h2 class="section-title">{section.title}</h2>
+          <ul>
+            {section.items.map((item) => (
+              <li>
+                {item.text}
+                {item.company && (
+                  <>
+                    {' '}
+                    {item.companyUrl
+                      ? <a href={item.companyUrl} target="_blank" rel="noopener noreferrer"><strong>{item.company}</strong></a>
+                      : <strong>{item.company}</strong>
+                    }
+                  </>
+                )}
+                {item.suffix && ` ${item.suffix}`}
+                {item.linkText && (
+                  <>
+                    {' '}<a href={item.linkUrl} target="_blank" rel="noopener noreferrer">{item.linkText}</a>
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+
+      <hr class="divider" />
+
+      <!-- Socials -->
+      <nav class="socials" aria-label="Social links">
+        {site.socials.map((social) => (
+          <a
+            href={social.url}
+            class="social-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon name={social.icon} />
+            <span>{social.name}</span>
+          </a>
+        ))}
+      </nav>
+    </div>
+
+    <!-- Right: ASCII video -->
+    <AsciiVideo />
+  </main>
+</Base>

@@ -1,0 +1,73 @@
+---
+// Place your video at public/ascii.webm
+// Adjust COLS below to control resolution (higher = more detail, more text)
+---
+
+<div class="ascii-panel" aria-hidden="true">
+  <!-- Hidden video source – muted required for autoplay -->
+  <video
+    id="ascii-src"
+    src="/ascii.webm"
+    muted
+    loop
+    playsinline
+    preload="auto"
+    style="display:none"
+  ></video>
+  <pre id="ascii-out" class="ascii-art">loading...</pre>
+</div>
+
+<script>
+  const video = document.getElementById('ascii-src') as HTMLVideoElement;
+  const pre   = document.getElementById('ascii-out') as HTMLPreElement;
+  const canvas = document.createElement('canvas');
+  const ctx    = canvas.getContext('2d', { willReadFrequently: true })!;
+
+  // ASCII ramp — dark to light (70 chars for fine gradation)
+  const CHARS = ' `.-\',:;"!^~<>ilI+?][}{)(|/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$';
+  const COLS  = 130;
+
+  function frameToAscii(): string {
+    if (!video.videoWidth) return '';
+    // 0.45 corrects for character aspect ratio (chars are ~2x taller than wide)
+    const rows = Math.round(COLS * (video.videoHeight / video.videoWidth) * 0.45);
+    canvas.width  = COLS;
+    canvas.height = rows;
+    ctx.drawImage(video, 0, 0, COLS, rows);
+    const { data } = ctx.getImageData(0, 0, COLS, rows);
+
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < COLS; x++) {
+        const i   = (y * COLS + x) * 4;
+        const raw = (data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114) / 255;
+        // gamma < 1 boosts dark regions so fine details (hair, edges) stay visible
+        const lum = Math.pow(raw, 0.5);
+        out += CHARS[Math.floor(lum * (CHARS.length - 1))];
+      }
+      out += '\n';
+    }
+    return out;
+  }
+
+  let rafId: number;
+
+  function tick() {
+    pre.textContent = frameToAscii();
+    rafId = requestAnimationFrame(tick);
+  }
+
+  video.addEventListener('play',  () => { cancelAnimationFrame(rafId); tick(); });
+  video.addEventListener('pause', () => cancelAnimationFrame(rafId));
+  video.addEventListener('ended', () => cancelAnimationFrame(rafId));
+
+  // Autoplay; on block, let user click pre to start
+  video.play().catch(() => {
+    pre.textContent  = '[ click to play ]';
+    pre.style.cursor = 'pointer';
+    pre.addEventListener('click', () => {
+      pre.style.cursor = '';
+      video.play();
+    }, { once: true });
+  });
+</script>
