@@ -102,15 +102,14 @@ a:hover {
 main {
   max-width: 90rem;
   margin: 0 auto;
-  padding: 5rem 3rem 4rem;
+  padding: 3rem 1.5rem;
   display: flex;
-  gap: 5rem;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 3rem;
 }
 
 .content {
-  flex: 0 0 36rem;
-  max-width: 36rem;
+  flex: 1;
 }
 
 section {
@@ -148,18 +147,16 @@ li::before {
 /* ---- ASCII Video ---- */
 
 .ascii-panel {
-  flex: 1 1 0;
-  min-width: 0;
-  overflow: hidden;
-  min-height: calc(100vh - 10rem);
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .ascii-art {
   font-family: var(--font-mono);
-  font-size: clamp(4.5px, 0.35vw, 6.5px);
+  font-size: 5px;
   line-height: 1.1;
   letter-spacing: 0.03em;
   color: var(--fg-secondary);
@@ -269,27 +266,24 @@ li::before {
 
 /* ---- Responsive ---- */
 
-@media (max-width: 1300px) {
+/* Side-by-side at large screens */
+@media (min-width: 1024px) {
+  main {
+    flex-direction: row;
+    align-items: center;
+    padding: 5rem 3rem;
+    gap: 5rem;
+  }
+
+  .ascii-art {
+    font-size: 6.5px;
+  }
+}
+
+/* Hide ASCII on small phones — not readable */
+@media (max-width: 480px) {
   .ascii-panel {
     display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  main {
-    padding: 3rem 1.5rem;
-  }
-
-  .content {
-    flex: none;
-    width: 100%;
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 640px) {
-  main {
-    padding: 2rem 1.25rem;
   }
 
   .resume-page {
