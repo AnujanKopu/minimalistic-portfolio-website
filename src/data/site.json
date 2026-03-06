@@ -8,7 +8,7 @@
     "textBefore": "Hi! I'm Anujan. SWE @ ",
     "company": "TD Bank",
     "companyUrl": "https://td.com",
-    "textAfter": ", CS @ University of Toronto. I build AI infra, scalable systems, and obsess over performance and code quality."
+    "textAfter": ", 3rd-year CS @ University of Toronto. I build AI infra, scalable systems, and obsess over performance and code quality."
   },
 
   "sections": [
@@ -24,7 +24,6 @@
     {
       "title": "entrepreneurial",
       "items": [
-        { "text": "Building the #1 AI animation platform", "linkText": "Toona.io", "linkUrl": "https://toona.io" },
         { "text": "Working on RoCoder, games, and a few other projects" },
         { "text": "Built a game studio (500k+ plays)" }
       ]
